@@ -3,8 +3,12 @@ import './App.css';
 
 import { Recipe } from './types'
 
+import { Container } from '@mui/material'
+
+import RecipeCard from './components/recipeCard';
+
 function App() {
-  const [recipe, setRecipe] = useState<Recipe | {}>({})
+  const [recipe, setRecipe] = useState<Recipe | null>(null)
   
   useEffect(() => {
    getRandomRecipe()
@@ -19,7 +23,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        
+        <Container maxWidth="md">
+          {recipe == null ? null :
+            <RecipeCard recipe={recipe} />
+          }
+        </Container>
       </header>
     </div>
   );
