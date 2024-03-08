@@ -14,7 +14,6 @@ function App() {
     await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}`)
     .then(response => response.json())
     .then(response => setRecipe(response.recipes[0]))
-    .then(response => console.log(recipe))
   }
 
   return (
