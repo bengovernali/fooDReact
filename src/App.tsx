@@ -1,23 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
+import { Recipe } from './types'
+
 function App() {
+  const [recipe, setRecipe] = useState<Recipe | {}>({})
+  
+  useEffect(() => {
+   getRandomRecipe()
+  }, [])
+
+  const getRandomRecipe = async () => {
+    await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${process.env.REACT_APP_API_KEY}`)
+    .then(response => response.json())
+    .then(response => setRecipe(response.recipes[0]))
+    .then(response => console.log(recipe))
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        
       </header>
     </div>
   );
